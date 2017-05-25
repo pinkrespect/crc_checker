@@ -6,7 +6,7 @@
 // Dividend: x^9 + x^7 + x^3 + x^2 + 1 = 1010001101
 
 class Encoder{
-    private int[] divisor; // Fixed-number array
+    public int[] divisor; // Fixed-number array
     private int[] dividend; // Flexible-number array - It changes as the calculation progresses.
     private int[] remainder;
     private int[] codeword;
@@ -36,7 +36,7 @@ class Encoder{
         remainder = new int[divisor.length - 1];
     }
 
-    private void setCodeword(int[] array, int[] remainder){ // Codeword 
+    private void setCodeword(int[] array, int[] remainder){ // Codeword
         codeword = new int[dividend.length];
         for(int i = 0; i < array.length;i++){
             codeword[i] = array[i];
@@ -87,6 +87,20 @@ public class CRC {
         int[] array = {1, 0, 1, 0, 0, 0, 1, 1, 0, 1};
         Encoder encoder = new Encoder(array);
         int remainder[] = encoder.calculate(array);
+
+        System.out.print("The data: ");
+        for(int i = 0; i < array.length; i++){
+            System.out.print(array[i] + " ");
+        }
+
+        System.out.println();
+
+        System.out.print("The divisor: ");
+        for(int i = 0; i < encoder.divisor.length; i++){
+            System.out.print(encoder.divisor[i] + " ");
+        }
+
+        System.out.println();
 
         System.out.print("The remainder: ");
         for(int i = 0; i < remainder.length; i++){
