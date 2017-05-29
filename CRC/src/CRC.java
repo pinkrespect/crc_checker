@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class CRC {
-    static void CRC_Checker(int[] input) {
+    static int[] CRC_Checker(int[] input) {
         int[] divisor = new int[]{1, 1, 0, 1, 0, 1};
         int[] dividend = IntStream.concat(Arrays.stream(input),
                 IntStream.generate(() -> 0).limit(divisor.length-1))
@@ -20,10 +20,10 @@ public class CRC {
             }
         });
 
+        return IntStream.concat(Arrays.stream(input), Arrays.stream(Arrays.copyOfRange(dividend, dividend.length-divisor.length + 1, dividend.length))).toArray();
     }
 
     public static void main(String args[]) {
-        //System.out.println(Arrays.toString(
-                CRC_Checker(new int[]{1, 0, 1, 0, 0, 0, 1, 1, 0, 1});
+        System.out.println(Arrays.toString(CRC_Checker(new int[]{1, 0, 1, 0, 0, 0, 1, 1, 0, 1})));
     }
 }
