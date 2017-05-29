@@ -20,7 +20,7 @@ public class CRC {
             }
         });
 
-        return IntStream.concat(Arrays.stream(input), Arrays.stream(Arrays.copyOfRange(dividend, dividend.length-divisor.length + 1, dividend.length))).toArray();
+        return IntStream.concat(Arrays.stream(input), Arrays.stream(dividend, dividend.length-divisor.length + 1, dividend.length)).toArray();
     }
 
     public static void main(String args[]) {
