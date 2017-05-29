@@ -1,17 +1,11 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class CRC {
     static int[] CRC_Checker(int[] input) {
         int[] divisor = new int[]{1, 1, 0, 1, 0, 1};
         int[] dividend = IntStream.concat(Arrays.stream(input),
-                IntStream.generate(() -> 0).limit(divisor.length-1))
-                .toArray();
-
-        IntStream.range(0, input.length).forEach(i -> dividend[i] = input[i]);
+                IntStream.generate(() -> 0).limit(divisor.length-1)).toArray();
         IntStream.range(0, input.length).forEachOrdered(i -> {
             if(dividend[i] == 1){
                 IntStream.range(0, divisor.length).forEachOrdered(j -> {
@@ -19,7 +13,6 @@ public class CRC {
                 });
             }
         });
-
         return IntStream.concat(Arrays.stream(input), Arrays.stream(dividend, dividend.length-divisor.length + 1, dividend.length)).toArray();
     }
 
