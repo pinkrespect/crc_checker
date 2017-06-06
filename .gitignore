@@ -1,2 +1,5 @@
 # Ignore build results
 *.class
+
+# Ignore gradle files
+/.gradle/
