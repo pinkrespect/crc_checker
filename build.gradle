@@ -1,0 +1,17 @@
+// Reference:
+//   https://docs.gradle.org/3.5/userguide/tutorial_java_projects.html
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'com.google.guava:guava:22.0'
+    testCompile 'junit:junit:4.12'
+}
+
+// Define the main class for the application
+mainClassName = 'App'
