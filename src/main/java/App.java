@@ -1,9 +1,10 @@
 import java.util.Arrays;
 import java.util.stream.IntStream;
+import com.google.common.primitives.Ints;
 
 public class App {
     public static void main(String[] args) {
-        final int[] input = new int[]{1, 0, 1, 0, 0, 0, 1, 1, 0, 1};
+        final int[] input = new int[]{ 1, 0, 1, 0, 0, 0, 1, 1, 0, 1 };
 
         System.out.println(Arrays.toString(crc_with_padding(input)));
         System.out.println(Arrays.toString(crc_without_padding(input)));
@@ -11,10 +12,7 @@ public class App {
 
     static int[] crc_with_padding(int[] input) {
         final int[] divisor = new int[] { 1, 1, 0, 1, 0, 1 };
-        final int[] dividend = IntStream.concat(
-                Arrays.stream(input),
-                IntStream.generate(() -> 0).limit(divisor.length-1)
-        ).toArray();
+        final int[] dividend = Ints.concat(input, new int[divisor.length-1]);
 
         IntStream.range(0, input.length).forEachOrdered(i -> {
             if (dividend[i] != 1) { return; }
@@ -23,10 +21,7 @@ public class App {
             });
         });
 
-        return IntStream.concat(
-                Arrays.stream(input),
-                Arrays.stream(dividend, dividend.length-divisor.length + 1, dividend.length)
-        ).toArray();
+        return Arrays.copyOfRange(dividend, dividend.length-divisor.length + 1, dividend.length);
     }
 
     static int[] crc_without_padding(int[] input) {
@@ -42,6 +37,6 @@ public class App {
             });
         });
 
-        return IntStream.concat(Arrays.stream(input), Arrays.stream(register)).toArray();
+        return register;
     }
 }
