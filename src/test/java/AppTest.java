@@ -6,7 +6,10 @@ import static org.junit.Assert.*;
 
 public class AppTest {
     @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+        final int[] input = new int[] { 1, 0, 1, 0, 0, 0, 1, 1, 0, 1 };
+        final int[] expected_result = new int[] { 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0 };
+
+        assertArrayEquals(App.crc_with_padding(input), expected_result);
+        assertArrayEquals(App.crc_without_padding(input), expected_result);
     }
 }
